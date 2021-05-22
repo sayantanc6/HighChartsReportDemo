@@ -1,0 +1,142 @@
+<html>
+   <head>
+      <title>Highcharts Tutorial</title>
+      <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet"
+		href="https://code.highcharts.com/css/highcharts.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+   </head>
+   
+   <body>
+   		                   <div class="row" style="margin-bottom:30px">
+                            <div class="col-md-6" style="margin-top:20px">
+                                <div id="salesByType" style="width:100%; height:400px;"></div>
+                            </div>
+                            <div class="col-md-6" style="margin-top:20px">
+                                <div id="salesByRegion" style="width:100%; height:400px;"></div>
+                            </div>
+                        </div>
+                        <input type="hidden" id ="northeastSales" value="[[${northeastSales}]]">
+                        <input type="hidden" id ="southSales" value="[[${southSales}]]">
+                        <input type="hidden" id ="midwestSales" value="[[${midwestSales}]]">
+                        <input type="hidden" id ="westSales" value="[[${westSales}]]">
+                        <input type="hidden" id ="inshoreSales" value="[[${inshoreSales}]]">
+                        <input type="hidden" id ="nearshoreSales" value="[[${nearshoreSales}]]">
+                        <input type="hidden" id ="offshoreSales" value="[[${offshoreSales}]]">
+                        
+                        
+                        
+      <script type="text/javascript"> 
+         $(document).ready(function() {
+        	 var northeastSales = $("#northeastSales").val();
+        	 var southSales = $("#southSales").val();
+        	 var midwestSales = $("#midwestSales").val();
+        	 var westSales = $("#westSales").val();
+        	 var inshoreSales = $("#inshoreSales").val();
+        	 var nearshoreSales = $("#nearshoreSales").val();
+        	 var offshoreSales = $("#offshoreSales").val();
+
+        	 Highcharts.setOptions({
+                 lang: {
+                     decimalPoint: '.',
+                     thousandsSep: ','
+                 }
+             });
+        	 
+             var salesByTypeChart = Highcharts.chart('salesByType', {
+                 chart: {
+                     type: 'column',
+                     margin: 75,
+                     options3d: {
+							enabled: true,
+                     	alpha: 15,
+                     	beta: 15,
+                     	depth: 110
+                     }
+                 },
+                 title: {
+                     text: 'Sales by Lure Type'
+                 },
+                 xAxis: {
+                     categories: ['May', 'June', 'July']
+                 },
+                 yAxis: {
+                     title: {
+                         text: 'Sales (US $)'
+                     }
+                 },
+                 tooltip: {
+                   	pointFormat: '${point.y:,.0f}'
+                 },
+                 plotOptions: {
+                 	column: {
+                 		depth: 60,
+                   		stacking: true,
+                    		grouping: false,
+                   		groupZPadding: 10
+                     }
+                 },
+                 series: [{
+                     name: 'Inshore',
+                     data: inshoreSales
+                 }, {
+                     name: 'Nearshore',
+                     data: nearshoreSales
+                 }, {
+                     name: 'Offshore',
+                     data: offshoreSales
+                 }]
+             });
+        	 
+            var salesByRegionChart = Highcharts.chart('salesByRegion', {
+                chart: {
+                    type: 'pie',
+                    margin: 40,
+                    options3d: {
+                		enabled: true,
+                        alpha: 45,
+                        beta: 0
+                    }
+                },
+                title: {
+                    text: 'Sales by Region'
+                },
+                tooltip: {
+                  	pointFormat: '${point.y:,.0f}'
+                },
+                plotOptions: {
+                	pie: {
+                		allowPointSelect: true,
+                		depth: 35
+                	}
+                },
+                series: [{
+                    name: 'Regions',
+                    colorByPoint:true,
+                    data: [{
+                        name: 'Northeast',
+                        y: northeastSales
+                    },{
+                        name: 'South',
+                        y:  southSales
+                    },{
+                        name: 'Midwest',
+                        y: midwestSales
+                    },{
+                        name: 'West',
+                        y: westSales
+                    }]
+            	}]
+            });
+         });
+      </script>
+   </body>
+</html>
