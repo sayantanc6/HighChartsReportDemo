@@ -11,6 +11,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
+		<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	</head>
 	
 	<body>
@@ -54,7 +58,9 @@
 							enabled: true,
                      	alpha: 15,
                      	beta: 15,
-                     	depth: 110
+                     	depth: 110,
+                     	viewDistance: 25,
+                        depth: 40
                      }
                  },
                  title: {
